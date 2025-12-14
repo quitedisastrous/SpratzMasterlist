@@ -51,11 +51,11 @@ function displayMasterlist(data) {
     // Image filename matches everything after the dash in the ID
     const idParts = entry.ID ? entry.ID.split("-") : [];
     const imageName =
-      idParts.length > 1 ? `/images/${idParts[1]}.png` : "placeholder.png";
+      idParts.length > 1 ? `images/${idParts[1]}.png` : "placeholder.png";
 
     let html = `
       <h2>[${entry.ID}]</h2>
-      <img src="${imageName}"
+      <img src="${imageName}" loading="lazy"
      alt="ML Image"
      onerror="this.onerror=null;this.src='placeholder.png';">`;
 
@@ -74,12 +74,14 @@ function displayMasterlist(data) {
     }
 
     if (entry.Obtainment === "Hidden") {
+      card.classList.add("hidden");
       html2 = `<p>This is a raffle design that has yet to be revealed! Stick around to see it eventually!</p>`;
     } else if (entry.Obtainment === "Reserved") {
       html = `<h2>[${entry.ID}]</h2>
       <img src="background.png"></img>`;
       html2 = `<h2 style = "text-align: center">Reserved</h2>`;
     } else if (entry.Obtainment === "Secret") {
+      card.classList.add("secret");
       html = `
       <h2>[S?R?TZ-01?]</h2>
       <img src="${imageName}"
