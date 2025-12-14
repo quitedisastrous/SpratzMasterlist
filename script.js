@@ -51,13 +51,15 @@ function displayMasterlist(data) {
     // Image filename matches everything after the dash in the ID
     const idParts = entry.ID ? entry.ID.split("-") : [];
     const imageName =
-      idParts.length > 1 ? `images/${idParts[1]}.png` : "placeholder.png";
+      idParts.length > 1
+        ? `images/${idParts[1]}.png`
+        : "images/placeholder.png";
 
     let html = `
       <h2>[${entry.ID}]</h2>
-      <img src="${imageName}" loading="lazy"
+      <img src="${imageName}"
      alt="ML Image"
-     onerror="this.onerror=null;this.src='placeholder.png';">`;
+     onerror="this.onerror=null;this.src='images/placeholder.png';">`;
 
     let html2 = `<p><strong>Obtained via:</strong> ${
       entry.Obtainment || "N/A"
@@ -86,7 +88,7 @@ function displayMasterlist(data) {
       <h2>[S?R?TZ-01?]</h2>
       <img src="${imageName}"
      alt="ML Image"
-     onerror="this.onerror=null;this.src='placeholder.png';">`;
+     onerror="this.onerror=null;this.src='images/placeholder.png';">`;
       html2 = `<p><i>Oh, I just love the new look here--don't you?</i></p>`;
     } else if (entry.Obtainment === "Voided") {
       html = `<h2>[${entry.ID}]</h2>
