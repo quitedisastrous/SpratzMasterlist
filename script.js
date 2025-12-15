@@ -58,8 +58,10 @@ function displayMasterlist(data) {
     let html = `
       <h2>[${entry.ID}]</h2>
       <img src="${imageName}"
-     alt="ML Image"
-     onerror="this.onerror=null;this.src='images/placeholder.png';">`;
+      loading = "lazy"
+      decoding = "aync"
+      alt="ML Image"
+      onerror="this.onerror=null;this.src='images/placeholder.png';">`;
 
     let html2 = `<p><strong>Obtained via:</strong> ${
       entry.Obtainment || "N/A"
