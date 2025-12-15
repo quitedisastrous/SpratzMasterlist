@@ -6,7 +6,7 @@ const csvUrl =
 ===================== */
 let allData = [];
 let currentPage = 1;
-const PAGE_SIZE = 24;
+const PAGE_SIZE = 18;
 
 /* =====================
    FILTERING
@@ -147,7 +147,6 @@ function populateCard(card, entry) {
   let html = `
     <h2>[${entry.ID}]</h2>
     <img src="${imageName}"
-      loading="lazy"
       decoding="async"
       alt="ML Image"
       onerror="this.onerror=null;this.src='images/placeholder.png';">
