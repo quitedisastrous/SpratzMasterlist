@@ -33,11 +33,37 @@
   display: block;
 }
 
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* or 4 / 5 if that fits your art better */
+  background: #f6f8f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 #cardCount {
   text-align: center;
   margin: 0 auto 10px auto;
   display: inline-block; /* so padding fits nicely */
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 1);
+  padding: 5px 10px;
+  border-radius: 8px;
+   border: 2px solid #ddd;
+}
+
+#pagination {
+  margin: 0 auto 10px auto;
+  display: inline-block; /* so padding fits nicely */
+  background: rgba(255, 255, 255, 1);
   padding: 5px 10px;
   border-radius: 8px;
    border: 2px solid #ddd;
@@ -208,4 +234,13 @@ body {
 
 .card a:hover {
   text-decoration: underline;
+}
+
+footer {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
 }
