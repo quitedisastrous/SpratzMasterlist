@@ -1,0 +1,128 @@
+// Display the masterlist on the page\
+/*
+function displayMasterlist(data) {
+  const container = document.getElementById("masterlist");
+  container.innerHTML = "";
+
+  data.forEach((entry) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    // Format traits with newlines
+    const traitsFormatted = entry.Traits
+      ? entry.Traits.split("\n")
+          .map((t) => t.trim())
+          .join("<br>")
+      : "N/A";
+
+    const substanceFormatted = entry.Substance
+      ? entry.Substance.split("\n")
+          .map((t) => t.trim())
+          .join("<br>")
+      : "N/A";
+
+    // Image filename matches everything after the dash in the ID
+    const idParts = entry.ID ? entry.ID.split("-") : [];
+    const imageName =
+      idParts.length > 1
+        ? `images/${idParts[1]}.png`
+        : "images/placeholder.png";
+
+    let html = `
+      <h2>[${entry.ID}]</h2>
+      <img src="${imageName}"
+      loading="lazy"
+      decoding="async"
+      alt="ML Image"
+      onerror="this.onerror=null;this.src='images/placeholder.png';">`;
+
+    let html2 = `<p><strong>Obtained via:</strong> ${
+      entry.Obtainment || "N/A"
+    }</p>
+      <p><strong>Owner:</strong> ${parseLinkField(entry.Owner)}</p>
+      <p><strong>Designer:</strong> ${parseLinkField(entry.Designer)}</p>
+      <p><strong>Artist:</strong> ${parseLinkField(entry.Artist)}</p>
+      <p><strong>Substance:<br></strong> ${substanceFormatted}</p>
+      <p><strong>Traits:</strong><br>${traitsFormatted}</p>
+    `;
+
+    if (entry.Inspo && entry.Inspo !== "") {
+      html2 += `<p><strong>Based off of:</strong> ${parseLinkField2(
+        entry.Inspo
+      )}</p>`;
+    }
+
+    if (entry.Obtainment === "Hidden") {
+      card.classList.add("hidden");
+      html2 = `<p>This is a raffle design that has yet to be revealed! Stick around to see it eventually!</p>`;
+    } else if (entry.Obtainment === "Reserved") {
+      html = `<h2>[${entry.ID}]</h2>
+      <img src="background.png"></img>`;
+      html2 = `<h2 style = "text-align: center">Reserved</h2>`;
+    } else if (entry.Obtainment === "Secret") {
+      card.classList.add("secret");
+      html = `
+      <h2>[S?R?TZ-01?]</h2>
+      <img src="${imageName}"
+     alt="ML Image"
+     onerror="this.onerror=null;this.src='images/placeholder.png';">`;
+      html2 = `<p><i>Oh, I just love the new look here--don't you?</i></p>`;
+    } else if (entry.Obtainment === "Voided") {
+      html = `<h2>[${entry.ID}]</h2>
+      <img src="background.png"></img>`;
+      html2 = `The Spratz that was once here has now been voided!`;
+    }
+
+    var newhtml = html + html2;
+
+    card.innerHTML = newhtml;
+
+    if (entry.Base && entry.Base !== "") {
+      const popup = document.createElement("div");
+      popup.className = "popup";
+      popup.innerHTML = `<p>This artwork uses a base by ${parseLinkField(
+        entry.Base
+      )}!</p>`;
+      card.appendChild(popup);
+    }
+
+    container.appendChild(card);
+
+    const img = card.querySelector("img");
+    if (img) {
+      img.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.className = "fullscreen-overlay";
+
+        const containerDiv = document.createElement("div");
+        containerDiv.className = "image-container";
+
+        const fullImg = img.cloneNode();
+        containerDiv.appendChild(fullImg);
+        overlay.appendChild(containerDiv);
+
+        // Clicking outside the image closes overlay
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) {
+            overlay.remove();
+          }
+        });
+
+        document.body.appendChild(overlay);
+      });
+    }
+  });
+}
+
+/*
+fetchCSV(csvUrl).then((data) => {
+  // Sort by the number after the dash, descending
+  data.sort((a, b) => {
+    const numA = a.ID.split("-")[1] ? parseInt(a.ID.split("-")[1], 10) : 0;
+    const numB = b.ID.split("-")[1] ? parseInt(b.ID.split("-")[1], 10) : 0;
+    return numB - numA; // descending order
+  });
+
+  displayMasterlist(data);
+});
+*/

@@ -1,4 +1,47 @@
-/* style.css */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.fullscreen-overlay .image-container {
+  position: relative;
+  max-width: 60%;
+  max-height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-overlay img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  cursor: zoom-out;
+  display: block;
+}
+
+#cardCount {
+  text-align: center;
+  margin: 0 auto 10px auto;
+  display: inline-block; /* so padding fits nicely */
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 8px;
+   border: 2px solid #ddd;
+}
 
 a {
   color: #008eac;
@@ -51,6 +94,15 @@ h3:hover {
   filter: grayscale(100%) brightness(0);
 }
 
+.secret img {
+  opacity: 0;
+  transition: opacity 5s ease;
+}
+
+.secret img:hover {
+  opacity: 0.2;
+}
+
 /* Basic body styling */
 
 body {
@@ -85,6 +137,7 @@ body {
 
 /* Each card */
 .card {
+  position: relative;
   background-color: #fff;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -94,12 +147,35 @@ body {
   transition: padding 1s;
 }
 
+.popup {
+  position: absolute;
+  bottom: 90%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 10;
+}
+
+
 .card:hover {
   background-color: #fff;
   border: 2px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   width: 250px;
+}
+
+.card:hover .popup {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Card title */
@@ -126,7 +202,7 @@ body {
 
 /* Links inside card */
 .card a {
-  color: #0077cc;
+  color: #008eac;
   text-decoration: none;
 }
 

@@ -16,7 +16,32 @@
 
 <br>
 
-<div id="masterlist"></div>
+<div id="searchContainer" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+<input type="text" id="searchInput" placeholder="Search by keyword . . . "
+style="width: 50%; flex-shrink: 0; padding: 8px; margin: 10px; display: block;">
+
+<select id="searchCategory">
+  <option value="All">All Fields</option>
+  <option value="Owner">Owner</option>
+  <option value="Designer">Designer</option>
+  <option value="Artist">Artist</option>
+  <option value="Base">Base</option>
+  <option value="Traits">Traits</option>
+  <option value="Obtainment">Obtainment</option>
+  <option value="Inspo">Based off of</option>
+</select>
+</div>
+
+
+<br>
+
+<div id="cardCount" style=" margin-bottom: 10px;"></div>
+
+<br>
+
+<div id="masterlist-container" style="height: 80vh; overflow-y: auto;">
+  <div id="masterlist"></div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="script.js"></script>
