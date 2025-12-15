@@ -120,7 +120,7 @@ function displayMasterlist(data) {
         }
       });
     },
-    { root: null, rootMargin: "200px", threshold: 0.1 }
+    { root: null, rootMargin: "500px", threshold: 0.1 }
   );
 
   data.forEach((entry) => {
