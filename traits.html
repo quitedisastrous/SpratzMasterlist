@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spratz Homepage</title>
+  <title>Spratz Traits</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div style="text-align: center;">
+    <a href="index.html">
 <img src="header.png" id = "header" alt="spratz header">
+    </a>
   </div>
 
 <br>
@@ -18,16 +20,34 @@
 
 <br>
 
-<h1><a href="masterlist.html">Masterlist</a></h2>
+<div id="searchContainer" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+<input type="text" id="searchInput" placeholder="Search by keyword . . . "
+style="width: 50%; flex-shrink: 0; padding: 8px; margin: 10px; display: block;">
+
+<select id="searchCategory">
+  <option value="All">All Fields</option>
+  <option value = "Name">Name</option>
+  <option value="Rarity">Rarity</option>
+  <option value="Type">Type</option>
+  <option value="Info">Info</option>
+</select>
+</div>
+
 
 <br>
 
-<h1><a href="traits.html">Traits</a></h2>
+<div id="cardCount" style=" margin-bottom: 10px;"></div>
 
+<br>
 
+<div id="pagination"></div>
+
+<div id="trait-container" style="height: 80vh; overflow-y: auto;">
+  <div id="trait"></div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<script src="script.js"></script>
+<script src="traitscript.js"></script>
 </body>
 <footer>
   <p>Spratz are a closed species owned by <a href="https://toyhou.se/Queued">Queued</a>, with help from <a href="https://toyhou.se/Void_And_Stars">Void_And_Stars</a>, <a href="https://toyhou.se/Runary">Runary</a>, <a href="https://toyhou.se/Mari-22">Mari-22</a>, <a href="https://toyhou.se/IggyThePsycho">IggyThePsycho</a>, and <a href="https://toyhou.se/UnsettledChaos">UnsettledChaos</a>!</p>

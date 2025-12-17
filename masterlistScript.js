@@ -1,16 +1,10 @@
 const csvUrl =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRy8ReQN9RP6SCgDu32sMFXNDWwrawe0d-tFUFE6K3syuPor5dztNyFotsFqYnKb7u1cz6pHUQV9uHU/pub?output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRy8ReQN9RP6SCgDu32sMFXNDWwrawe0d-tFUFE6K3syuPor5dztNyFotsFqYnKb7u1cz6pHUQV9uHU/pub?gid=0&single=true&output=csv";
 
-/* =====================
-   STATE
-===================== */
 let allData = [];
 let currentPage = 1;
 const PAGE_SIZE = 18;
 
-/* =====================
-   FILTERING
-===================== */
 function filterMasterlist(data, keyword, category) {
   if (!keyword) return data;
   keyword = keyword.toLowerCase();
@@ -41,9 +35,6 @@ function filterMasterlist(data, keyword, category) {
   });
 }
 
-/* =====================
-   PAGINATION
-===================== */
 function paginate(data) {
   const start = (currentPage - 1) * PAGE_SIZE;
   return data.slice(start, start + PAGE_SIZE);
@@ -70,9 +61,6 @@ window.changePage = function (delta) {
   updateDisplay();
 };
 
-/* =====================
-   CSV FETCH
-===================== */
 async function fetchCSV(url) {
   const response = await fetch(url, { cache: "no-store" });
   const csvText = await response.text();
@@ -85,9 +73,6 @@ async function fetchCSV(url) {
   return results.data.filter((row) => row.ID);
 }
 
-/* =====================
-   DISPLAY MASTERLIST
-===================== */
 function displayMasterlist(pageData, totalCount) {
   const container = document.getElementById("masterlist");
   const countContainer = document.getElementById("cardCount");
@@ -103,9 +88,6 @@ function displayMasterlist(pageData, totalCount) {
   });
 }
 
-/* =====================
-   CARD HELPERS
-===================== */
 function parseLinkField(field) {
   if (!field) return "N/A";
   const parts = field.split("|").map((p) => p.trim());
@@ -123,10 +105,6 @@ function parseLinkField2(field) {
   return field;
 }
 
-/* =====================
-   POPULATE CARD
-   (Obtainment logic preserved)
-===================== */
 function populateCard(card, entry) {
   const traitsFormatted = entry.Traits
     ? entry.Traits.split("\n")
@@ -167,10 +145,11 @@ function populateCard(card, entry) {
     )}</p>`;
   }
 
-  /* ===== Obtainment cases ===== */
-  if (entry.Obtainment === "Hidden") {
+  if (entry.Obtainment === "Hidden Raffle") {
     card.classList.add("hidden");
     html2 = `<p>This is a raffle design that has yet to be revealed! Stick around to see it eventually!</p>`;
+  } else if (entry.Obtainment === "Hidden Adopt") {
+    html2 = `<h2 style="text-align:center">This is an adopt that has yet to be purchased!</h2>`;
   } else if (entry.Obtainment === "Reserved") {
     html = `<h2>[${entry.ID}]</h2><img src="background.png">`;
     html2 = `<h2 style="text-align:center">Reserved</h2>`;

@@ -1,0 +1,169 @@
+const csvUrl =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRy8ReQN9RP6SCgDu32sMFXNDWwrawe0d-tFUFE6K3syuPor5dztNyFotsFqYnKb7u1cz6pHUQV9uHU/pub?gid=181761555&single=true&output=csv";
+
+let allData = [];
+let currentPage = 1;
+const PAGE_SIZE = 18;
+
+function filterMasterlist(data, keyword, category) {
+  if (!keyword) return data;
+  keyword = keyword.toLowerCase();
+
+  return data.filter((entry) => {
+    if (category === "All") {
+      return [entry.ID, entry.Name, entry.Rarity, entry.Type, entry.Info]
+        .join(" ")
+        .toLowerCase()
+        .includes(keyword);
+    } else {
+      return (entry[category] || "").toLowerCase().includes(keyword);
+    }
+  });
+}
+
+function paginate(data) {
+  const start = (currentPage - 1) * PAGE_SIZE;
+  return data.slice(start, start + PAGE_SIZE);
+}
+
+function updatePagination(totalItems) {
+  const pagination = document.getElementById("pagination");
+  const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+
+  pagination.innerHTML = `
+    <button ${
+      currentPage === 1 ? "disabled" : ""
+    } onclick="changePage(-1)">Prev</button>
+    <span>Page ${currentPage} of ${totalPages}</span>
+    <button ${
+      currentPage === totalPages ? "disabled" : ""
+    } onclick="changePage(1)">Next</button>
+  `;
+}
+
+window.changePage = function (delta) {
+  currentPage += delta;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  updateDisplay();
+};
+
+async function fetchCSV(url) {
+  const response = await fetch(url, { cache: "no-store" });
+  const csvText = await response.text();
+  const results = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: (h) => h.trim(),
+    transform: (v) => v.trim(),
+  });
+  return results.data.filter((row) => row.ID2);
+}
+
+function displayMasterlist(pageData, totalCount) {
+  const container = document.getElementById("masterlist");
+  const countContainer = document.getElementById("cardCount");
+
+  container.innerHTML = "";
+  countContainer.textContent = `Showing ${totalCount} total entries`;
+
+  pageData.forEach((entry) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    container.appendChild(card);
+    populateCard(card, entry);
+  });
+}
+
+function parseLinkField(field) {
+  if (!field) return "N/A";
+  const parts = field.split("|").map((p) => p.trim());
+  if (parts.length === 2) {
+    return `<a href="${parts[0]}" target="_blank">${parts[1]}</a>`;
+  }
+  return field;
+}
+
+function parseLinkField2(field) {
+  if (!field) return "N/A";
+  if (field.startsWith("http")) {
+    return `<a href="${field}" target="_blank">${field}</a>`;
+  }
+  return field;
+}
+
+function populateCard(card, entry) {
+  const imageName =
+    entry.ID.length === 1 ? `images/${entry.ID}.png` : "images/placeholder.png";
+
+  let html = `
+    <img src="${imageName}"
+      decoding="async"
+      alt="ML Image"
+      onerror="this.onerror=null;this.src='images/placeholder.png';">
+  `;
+
+  let html2 = `
+  <h2>${entry.Name}</h2>
+    <h3>Rarity: ${entry.Rarity}</h3>
+    <h3>Type: ${entry.Type}</h3>
+    <p>${entry.Info}<p>
+  `;
+
+  card.innerHTML = html + html2;
+
+  const img = card.querySelector("img");
+  if (img) {
+    img.addEventListener("click", () => {
+      const overlay = document.createElement("div");
+      overlay.className = "fullscreen-overlay";
+
+      const containerDiv = document.createElement("div");
+      containerDiv.className = "image-container";
+
+      containerDiv.appendChild(img.cloneNode());
+      overlay.appendChild(containerDiv);
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+
+      document.body.appendChild(overlay);
+    });
+  }
+}
+
+const searchInput = document.getElementById("searchInput");
+const searchCategory = document.getElementById("searchCategory");
+
+function updateDisplay() {
+  const keyword = searchInput.value;
+  const category = searchCategory.value;
+
+  const filtered = filterMasterlist(allData, keyword, category);
+  const pageData = paginate(filtered);
+
+  displayMasterlist(pageData, filtered.length);
+  updatePagination(filtered.length);
+}
+
+fetchCSV(csvUrl).then((data) => {
+  /*data.sort((a, b) => {
+    const numA = parseInt(a.ID.split("-")[1] || 0, 10);
+    const numB = parseInt(b.ID.split("-")[1] || 0, 10);
+    return numB - numA;
+  });*/
+
+  allData = data;
+
+  searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    updateDisplay();
+  });
+
+  searchCategory.addEventListener("change", () => {
+    currentPage = 1;
+    updateDisplay();
+  });
+
+  updateDisplay();
+});
