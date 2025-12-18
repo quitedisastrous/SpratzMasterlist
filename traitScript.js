@@ -5,7 +5,7 @@ let allData = [];
 let currentPage = 1;
 const PAGE_SIZE = 18;
 
-function filterMasterlist(data, keyword, category) {
+function filterTraits(data, keyword, category) {
   if (!keyword) return data;
   keyword = keyword.toLowerCase();
 
@@ -59,8 +59,8 @@ async function fetchCSV(url) {
   return results.data.filter((row) => row.ID2);
 }
 
-function displayMasterlist(pageData, totalCount) {
-  const container = document.getElementById("masterlist");
+function displayTraits(pageData, totalCount) {
+  const container = document.getElementById("trait");
   const countContainer = document.getElementById("cardCount");
 
   container.innerHTML = "";
@@ -92,20 +92,22 @@ function parseLinkField2(field) {
 }
 
 function populateCard(card, entry) {
-  const imageName =
-    entry.ID.length === 1 ? `images/${entry.ID}.png` : "images/placeholder.png";
+  const imageName = entry.ID
+    ? `traitImages/${entry.ID}.png`
+    : "images/placeholder.png";
 
   let html = `
     <img src="${imageName}"
       decoding="async"
-      alt="ML Image"
+      alt="Trait Image"
+      class = "${entry.Rarity}"
       onerror="this.onerror=null;this.src='images/placeholder.png';">
   `;
 
   let html2 = `
   <h2>${entry.Name}</h2>
-    <h3>Rarity: ${entry.Rarity}</h3>
-    <h3>Type: ${entry.Type}</h3>
+    <h3>${entry.Rarity}</h3>
+    <h3>${entry.Type}</h3>
     <p>${entry.Info}<p>
   `;
 
@@ -139,10 +141,10 @@ function updateDisplay() {
   const keyword = searchInput.value;
   const category = searchCategory.value;
 
-  const filtered = filterMasterlist(allData, keyword, category);
+  const filtered = filterTraits(allData, keyword, category);
   const pageData = paginate(filtered);
 
-  displayMasterlist(pageData, filtered.length);
+  displayTraits(pageData, filtered.length);
   updatePagination(filtered.length);
 }
 
