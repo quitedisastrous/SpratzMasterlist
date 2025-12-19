@@ -130,11 +130,68 @@ function populateCard(card, entry) {
       onerror="this.onerror=null;this.src='images/placeholder.png';">
   `;
 
-  let html2 = `
-    <p><strong>Obtained via:</strong> ${entry.Obtainment || "N/A"}</p>
-    <p><strong>Owner:</strong> ${parseLinkField(entry.Owner)}</p>
+  let htmlowner = `
+    <p><strong>Owner:</strong> ${parseLinkField(entry.Owner)}</p>`;
+
+  if (
+    entry.Owner === "https://toyhou.se/IggythePsycho | IggythePsycho" ||
+    entry.Owner === "https://toyhou.se/Mari-22 | Mari-22" ||
+    entry.Owner === "https://toyhou.se/Rudy | Rudy" ||
+    entry.Owner === "https://toyhou.se/Runary | Runary" ||
+    entry.Owner === "https://toyhou.se/Void_And_Stars | Void_And_Stars"
+  ) {
+    htmlowner = `
+    <p><strong>Owner:</strong> ✩${parseLinkField(entry.Owner)}</p>
+  `;
+  } else if (entry.Owner === "https://toyhou.se/Queued | Queued") {
+    htmlowner = `
+    <p><strong>Owner:</strong> ✭${parseLinkField(entry.Owner)}</p>
+  `;
+  }
+
+  let htmldesigner = `
     <p><strong>Designer:</strong> ${parseLinkField(entry.Designer)}</p>
-    <p><strong>Artist:</strong> ${parseLinkField(entry.Artist)}</p>
+  `;
+
+  if (
+    entry.Designer === "https://toyhou.se/IggythePsycho | IggythePsycho" ||
+    entry.Designer === "https://toyhou.se/Mari-22 | Mari-22" ||
+    entry.Designer === "https://toyhou.se/Rudy | Rudy" ||
+    entry.Designer === "https://toyhou.se/Runary | Runary" ||
+    entry.Designer === "https://toyhou.se/Void_And_Stars | Void_And_Stars"
+  ) {
+    htmldesigner = `
+    <p><strong>Designer:</strong> ✩${parseLinkField(entry.Designer)}</p>
+  `;
+  } else if (entry.Designer === "https://toyhou.se/Queued | Queued") {
+    htmldesigner = `
+    <p><strong>Designer:</strong> ✭${parseLinkField(entry.Designer)}</p>
+  `;
+  }
+
+  let htmlartist = `
+    <p><strong>Artist:</strong> ${parseLinkField(entry.Artist)}</p>`;
+
+  if (
+    entry.Artist === "https://toyhou.se/IggythePsycho | IggythePsycho" ||
+    entry.Artist === "https://toyhou.se/Mari-22 | Mari-22" ||
+    entry.Artist === "https://toyhou.se/Rudy | Rudy" ||
+    entry.Artist === "https://toyhou.se/Runary | Runary" ||
+    entry.Artist === "https://toyhou.se/Void_And_Stars | Void_And_Stars"
+  ) {
+    htmlartist = `
+    <p><strong>Artist:</strong> ✩${parseLinkField(entry.Artist)}</p>
+  `;
+  } else if (entry.Artist === "https://toyhou.se/Queued | Queued") {
+    htmlartist = `
+    <p><strong>Artist:</strong> ✭${parseLinkField(entry.Artist)}</p>
+  `;
+  }
+
+  let html2 = `
+    <p><strong>Obtained via:</strong> ${
+      entry.Obtainment || "N/A"
+    }</p> ${htmlowner} ${htmldesigner} ${htmlartist}
     <p><strong>Substance:<br></strong> ${substanceFormatted}</p>
     <p><strong>Traits:</strong><br>${traitsFormatted}</p>
   `;
@@ -199,9 +256,6 @@ function populateCard(card, entry) {
   }
 }
 
-/* =====================
-   INIT
-===================== */
 const searchInput = document.getElementById("searchInput");
 const searchCategory = document.getElementById("searchCategory");
 
