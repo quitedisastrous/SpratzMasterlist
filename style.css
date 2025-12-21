@@ -71,7 +71,6 @@
 
 #guide {
   background-color: #f4f4f4;
-  border: 2px solid #ddd;
   border-radius: 16px;
   width: 90vh;
   margin: auto;
@@ -88,7 +87,6 @@
   height: 20vh;
   margin: auto;
   border-radius: 32px;
-  border: 2px solid #ddd;
 }
 
 #headerstack {
@@ -98,9 +96,9 @@
   margin: auto;
   overflow: hidden;
   border-radius: 32px;
-  background: radial-gradient(#dadada, #f4f4f4);
-  border: 2px solid #ddd;
-  
+  background: linear-gradient(180deg, #006479, #018fac, #ffffff);
+  border: 5px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 1);
 }
 
 #sidestack {
@@ -111,8 +109,9 @@
   overflow: hidden;
   z-index: 1;
   border-radius: 32px;
-  border: 2px solid #ddd;
-  background: radial-gradient(#dadada, #f4f4f4);
+  border: 5px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 1);
+  background: linear-gradient(180deg, #006479, #018fac, #ffffff);
   
 }
 
@@ -124,8 +123,9 @@
   overflow: hidden;
   z-index: 1;
   border-radius: 32px;
-  border: 2px solid #ddd;
-  background: radial-gradient(#dadada, #f4f4f4); 
+  border: 5px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 1);
+  background: linear-gradient(180deg, #006479, #018fac, #ffffff); 
 }
 
 
@@ -195,11 +195,11 @@
 }
 
 a {
-  color: #008eac;
+  color: #018fac;
 }
 
 a:hover {
-  color: #008eac;
+  color: #018fac;
   text-shadow: 0 2px 10px rgba(0, 142, 172, 0.25);
 }
 

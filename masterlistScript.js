@@ -5,6 +5,25 @@ let allData = [];
 let currentPage = 1;
 const PAGE_SIZE = 18;
 
+/*window.CSSmover = function () {
+  const favicon = document.getElementById("favicon");
+  if (!favicon) return;
+  favicon.setAttribute("href", "013yovfwoebfq.png?v=" + Date.now());
+};*/
+
+window.CSSmover = function () {
+  const oldFavicon = document.getElementById("favicon");
+  if (oldFavicon) oldFavicon.remove();
+
+  const newFavicon = document.createElement("link");
+  newFavicon.id = "favicon";
+  newFavicon.rel = "icon";
+  newFavicon.type = "image/png";
+  newFavicon.href = "013yovfwoebfq.png?v=" + Date.now();
+
+  document.head.appendChild(newFavicon);
+};
+
 function filterMasterlist(data, keyword, category) {
   if (!keyword) return data;
   keyword = keyword.toLowerCase();
@@ -213,7 +232,7 @@ function populateCard(card, entry) {
   } else if (entry.Obtainment === "Secret") {
     card.classList.add("secret");
     html = `
-      <h2>[S?R?TZ-01?]</h2>
+      <h2 onclick="CSSmover()" style="cursor:pointer;">[S?R?TZ-01?]</h2>
       <img src="${imageName}"
         alt="ML Image"
         onerror="this.onerror=null;this.src='images/placeholder.png';">
