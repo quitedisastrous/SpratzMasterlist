@@ -276,7 +276,7 @@ body {
   background-position: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
 
   #trait {
     display: flex;
@@ -314,7 +314,7 @@ body {
 
 }
 
-@media (min-width: 901px) {
+@media (min-width: 801px) {
 
 #trait {
   display: flex;
