@@ -1,3 +1,22 @@
+#siteMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(225deg, #006479, #018fac, #ffffff);
+  color: white;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  z-index: 777;
+  pointer-events: auto;
+  text-align: center;
+  font-family: georgia;
+  font-style: italic;
+}
+
 .fullscreen-overlay {
   position: fixed;
   top: 0;
@@ -324,8 +343,10 @@ body {
     width: 50vh;
     height: auto;
   }
+}
 
-  #dotcontainer {
+@media (max-width: 1000px) {
+   #dotcontainer {
   position: absolute;
   top: 0;
   left: 0;
@@ -350,7 +371,6 @@ body {
   background-size: 450px 150px;
   filter: grayscale(100%) brightness(10) opacity(0.2);
 }
-
 }
 
 @media (min-width: 801px) {
@@ -450,6 +470,26 @@ body {
   z-index: 10;
 }
 
+.secret-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.secret-popup {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 10;
+}
 
 .card:hover {
   background-color: #fff;

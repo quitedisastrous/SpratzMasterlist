@@ -11,6 +11,42 @@ const PAGE_SIZE = 18;
   favicon.setAttribute("href", "013yovfwoebfq.png?v=" + Date.now());
 };*/
 
+let toggle = "none";
+
+window.CSSmover3 = function () {
+  const footer = document.querySelector("footer"); // main footer
+  const bottomFooter = document.getElementById("bottomFooter"); // bottom footer
+
+  const secretMessage3 = `
+    <i>A dreadful thing it has said to me, its wishes won't come true.<br>
+    But you've played your part, so I'll give this to you.<br><br>This is between us. Reveal it to none.<br>013yovfwoebfq</i>
+  `;
+
+  if (toggle === "111") {
+    if (footer) footer.innerHTML = secretMessage3;
+    if (bottomFooter) bottomFooter.innerHTML = secretMessage3;
+  }
+
+  toggle = "none";
+};
+
+window.CSSmover2 = function () {
+  const footer = document.querySelector("footer"); // main footer
+  const bottomFooter = document.getElementById("bottomFooter"); // bottom footer
+
+  const secretMessage2 = `
+    <b>I don't know why it sent you, but no longer will I play.<br>
+    Tell it that I decline. I hope it stays away.</b>
+  `;
+
+  if (toggle === "secret") {
+    if (footer) footer.innerHTML = secretMessage2;
+    if (bottomFooter) bottomFooter.innerHTML = secretMessage2;
+  }
+
+  toggle = "111";
+};
+
 window.CSSmover = function () {
   const oldFavicon = document.getElementById("favicon");
   if (oldFavicon) oldFavicon.remove();
@@ -22,6 +58,21 @@ window.CSSmover = function () {
   newFavicon.href = "013yovfwoebfq.png?v=" + Date.now();
 
   document.head.appendChild(newFavicon);
+
+  const footer = document.querySelector("footer"); // main footer
+  const bottomFooter = document.getElementById("bottomFooter"); // bottom footer
+
+  const secretMessage = `
+    <i>Perhaps you could not get to it, but worry not, it's fine.<br>
+    Instead do me a favor, and find the one touched by the Divine.</i>
+  `;
+
+  if (toggle === "none") {
+    if (footer) footer.innerHTML = secretMessage;
+    if (bottomFooter) bottomFooter.innerHTML = secretMessage;
+  }
+
+  toggle = "secret";
 };
 
 function filterMasterlist(data, keyword, category) {
@@ -232,18 +283,40 @@ function populateCard(card, entry) {
   } else if (entry.Obtainment === "Secret") {
     card.classList.add("secret");
     html = `
-      <h2 onclick="CSSmover()" style="cursor:pointer;">[S?R?TZ-01?]</h2>
+      <h2 onclick="CSSmover()">[S?R?TZ-01?]</h2>
+      <div class="secret-wrapper">
       <img src="${imageName}"
         alt="ML Image"
+        id="secret-image"
         onerror="this.onerror=null;this.src='images/placeholder.png';">
+        </div>
     `;
-    html2 = `<p><i>Oh, I just love the new look here--don't you?</i></p>`;
+    html2 = `<p><i>Oh, I just love the new look here--do you <span id="sec">no</span>t?</i></p>`;
+    card.innerHTML = html + html2;
+
+    const span3 = card.querySelector("#sec");
+    span3.addEventListener("click", () => {
+      CSSmover3();
+    });
   } else if (entry.Obtainment === "Voided") {
     html = `<h2>[${entry.ID}]</h2><img src="background.png">`;
     html2 = `The Spratz that was once here has now been voided!`;
   }
 
-  card.innerHTML = html + html2;
+  if (entry.ID === "SPRATZ-111") {
+    html = `
+      <h2 onclick="CSSmover2()">[SPRATZ-111]</h2>
+      <div class="secret-wrapper">
+      <img src="${imageName}"
+        alt="ML Image"
+        onerror="this.onerror=null;this.src='images/placeholder.png';">
+        </div>
+    `;
+  }
+
+  if (!(entry.Obtainment === "Secret")) {
+    card.innerHTML = html + html2;
+  }
 
   if (entry.Base) {
     const popup = document.createElement("div");
