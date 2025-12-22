@@ -92,24 +92,47 @@ function parseLinkField2(field) {
 }
 
 function populateCard(card, entry) {
+  if (entry.Rarity === "Divine Influence") {
+    card.classList.add("Divine");
+  }
+
   const imageName = entry.ID
     ? `traitImages/${entry.ID}.png`
     : "images/placeholder.png";
 
-  let html = `
+  let html;
+
+  if (entry.Rarity === "Divine Influence") {
+    html = `
+    <img src="${imageName}"
+      decoding="async"
+      alt="Trait Image"
+      onerror="this.onerror=null;this.src='images/placeholder.png';">
+  `;
+  } else {
+    html = `
     <img src="${imageName}"
       decoding="async"
       alt="Trait Image"
       class = "${entry.Rarity}"
       onerror="this.onerror=null;this.src='images/placeholder.png';">
   `;
+  }
 
-  let html2 = `
+  let html2 = ``;
+
+  if (entry.Rarity === "Divine Influence") {
+    html2 = `
   <h2>${entry.Name}</h2>
+    <p>${entry.Info}<p>
+  `;
+  } else {
+    html2 = `<h2>${entry.Name}</h2>
     <h3>${entry.Rarity}</h3>
     <h3>${entry.Type}</h3>
     <p>${entry.Info}<p>
   `;
+  }
 
   card.innerHTML = html + html2;
 
@@ -149,12 +172,6 @@ function updateDisplay() {
 }
 
 fetchCSV(csvUrl).then((data) => {
-  /*data.sort((a, b) => {
-    const numA = parseInt(a.ID.split("-")[1] || 0, 10);
-    const numB = parseInt(b.ID.split("-")[1] || 0, 10);
-    return numB - numA;
-  });*/
-
   allData = data;
 
   searchInput.addEventListener("input", () => {

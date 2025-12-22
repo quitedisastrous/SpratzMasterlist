@@ -69,6 +69,14 @@
    border: 2px solid #ddd;
 }
 
+.card.Divine {
+  box-shadow: 0 0 10px 5px white;
+}
+
+.card.Divine img {
+  background-color: #ddd;
+}
+
 #guide {
   background-color: #f4f4f4;
   border-radius: 16px;
