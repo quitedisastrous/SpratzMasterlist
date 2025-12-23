@@ -45,29 +45,31 @@ window.CSSmover2 = function () {
 };
 
 window.CSSmover = function () {
-  const oldFavicon = document.getElementById("favicon");
-  if (oldFavicon) oldFavicon.remove();
+  if (toggle === "none") {
+    const oldFavicon = document.getElementById("favicon");
+    if (oldFavicon) oldFavicon.remove();
 
-  const newFavicon = document.createElement("link");
-  newFavicon.id = "favicon";
-  newFavicon.rel = "icon";
-  newFavicon.type = "image/png";
-  newFavicon.href = "013yovfwoebfq.png?v=" + Date.now();
+    const newFavicon = document.createElement("link");
+    newFavicon.id = "favicon";
+    newFavicon.rel = "icon";
+    newFavicon.type = "image/png";
+    newFavicon.href = "013yovfwoebfq.png?v=" + Date.now();
 
-  document.head.appendChild(newFavicon);
+    document.head.appendChild(newFavicon);
 
-  const footer = document.querySelector("footer"); // main footer
-  const bottomFooter = document.getElementById("bottomFooter"); // bottom footer
+    const footer = document.querySelector("footer"); // main footer
+    const bottomFooter = document.getElementById("bottomFooter"); // bottom footer
 
-  const secretMessage = `
+    const secretMessage = `
     <i>Perhaps you could not get to it, but worry not, it's fine.<br>
     Instead do me a favor, and find the one touched by the Divine.</i>
   `;
 
-  if (toggle === "none") {
-    if (footer) footer.innerHTML = secretMessage;
-    if (bottomFooter) bottomFooter.innerHTML = secretMessage;
-    toggle = "secret";
+    if (toggle === "none") {
+      if (footer) footer.innerHTML = secretMessage;
+      if (bottomFooter) bottomFooter.innerHTML = secretMessage;
+      toggle = "secret";
+    }
   }
 };
 
