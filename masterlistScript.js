@@ -19,15 +19,14 @@ window.CSSmover3 = function () {
 
   const secretMessage3 = `
     <i>A dreadful thing it has said to me, its wishes won't come true.<br>
-    But you've played your part, so I'll give this to you.<br><br>This is between us. Reveal it to none.<br>013yovfwoebfq</i>
+    But since you've played your part, I suppose I'll give this to you.<br><br>This is between us. Reveal it to none.<br>013yovfwoebfq</i>
   `;
 
   if (toggle === "111") {
     if (footer) footer.innerHTML = secretMessage3;
     if (bottomFooter) bottomFooter.innerHTML = secretMessage3;
+    toggle = "none";
   }
-
-  toggle = "none";
 };
 
 window.CSSmover2 = function () {
@@ -42,9 +41,8 @@ window.CSSmover2 = function () {
   if (toggle === "secret") {
     if (footer) footer.innerHTML = secretMessage2;
     if (bottomFooter) bottomFooter.innerHTML = secretMessage2;
+    toggle = "111";
   }
-
-  toggle = "111";
 };
 
 window.CSSmover = function () {
@@ -70,9 +68,8 @@ window.CSSmover = function () {
   if (toggle === "none") {
     if (footer) footer.innerHTML = secretMessage;
     if (bottomFooter) bottomFooter.innerHTML = secretMessage;
+    toggle = "secret";
   }
-
-  toggle = "secret";
 };
 
 function filterMasterlist(data, keyword, category) {
@@ -296,6 +293,7 @@ function populateCard(card, entry) {
 
     const span3 = card.querySelector("#sec");
     span3.addEventListener("click", () => {
+      console.log("click, toggle =", toggle);
       CSSmover3();
     });
   } else if (entry.Obtainment === "Voided") {
