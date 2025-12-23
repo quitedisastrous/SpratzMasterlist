@@ -25,7 +25,6 @@ window.CSSmover3 = function () {
   if (toggle === "111") {
     if (footer) footer.innerHTML = secretMessage3;
     if (bottomFooter) bottomFooter.innerHTML = secretMessage3;
-    toggle = "none";
   }
 };
 
