@@ -62,7 +62,7 @@ window.CSSmover = function () {
 
     const secretMessage = `
     <i>Perhaps you could not get to it, but worry not, it's fine.<br>
-    Instead do me a favor, and find the one touched by the Divine.</i>
+    Instead do me a favor, and find the one--the main one--touched by the Divine.</i>
   `;
 
     if (toggle === "none") {
