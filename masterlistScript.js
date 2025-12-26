@@ -191,7 +191,7 @@ function populateCard(card, entry) {
     idParts.length > 1 ? `images/${idParts[1]}.png` : "images/placeholder.png";
 
   let html = `
-    <h2>[${entry.ID}]</h2>
+    <h2><a>[${entry.ID}]</a></h2>
     <img src="${imageName}"
       decoding="async"
       alt="ML Image"
