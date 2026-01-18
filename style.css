@@ -17,7 +17,7 @@
   font-style: italic;
 }
 
-.fullscreen-overlay {
+#visible .fullscreen-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -32,7 +32,7 @@
   padding: 20px;
 }
 
-.fullscreen-overlay .image-container {
+#visible .fullscreen-overlay .image-container {
   position: relative;
   max-width: 60%;
   max-height: 60%;
@@ -41,7 +41,7 @@
   align-items: center;
 }
 
-.fullscreen-overlay img {
+#visible .fullscreen-overlay img {
   width: auto;
   height: auto;
   max-width: 100%;
@@ -54,7 +54,7 @@
 
 .card-image {
   width: 100%;
-  aspect-ratio: 1 / 1;   /* or 4 / 5 if that fits your art better */
+  aspect-ratio: 1 / 1;  
   background: #f6f8f9;
   display: flex;
   align-items: center;

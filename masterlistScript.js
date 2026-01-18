@@ -202,7 +202,6 @@ function populateCard(card, entry) {
     <p><strong>Owner:</strong> ${parseLinkField(entry.Owner)}</p>`;
 
   if (
-    entry.Owner === "https://toyhou.se/IggythePsycho | IggythePsycho" ||
     entry.Owner === "https://toyhou.se/Mari-22 | Mari-22" ||
     entry.Owner === "https://toyhou.se/Rudy | Rudy" ||
     entry.Owner === "https://toyhou.se/Runary | Runary" ||
@@ -329,8 +328,10 @@ function populateCard(card, entry) {
   const img = card.querySelector("img");
   if (img) {
     img.addEventListener("click", () => {
-      const overlay = document.createElement("div");
-      overlay.className = "fullscreen-overlay";
+      if (!entry.Obtainment === "Hidden Adopt") {
+        const overlay = document.createElement("div");
+        overlay.className = "fullscreen-overlay";
+      }
 
       const containerDiv = document.createElement("div");
       containerDiv.className = "image-container";
