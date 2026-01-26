@@ -265,7 +265,7 @@ function populateCard(card, entry) {
 
   if (entry.Inspo) {
     html2 += `<p><strong>Based off of:</strong> ${parseLinkField2(
-      entry.Inspo
+      entry.Inspo,
     )}</p>`;
   }
 
@@ -320,7 +320,7 @@ function populateCard(card, entry) {
     const popup = document.createElement("div");
     popup.className = "popup";
     popup.innerHTML = `<p>This artwork uses a base by ${parseLinkField(
-      entry.Base
+      entry.Base,
     )}!</p>`;
     card.appendChild(popup);
   }
